@@ -1,0 +1,10 @@
+<div class="now-playing-container m-3">
+  <h1 class="fs-2 fw-semibold title">Movies</h1>
+  <div class="movies-grid mt-5">
+    @for(movie of movies; track movie.id) {
+    <app-movie-card [movie]="movie" [likedMovies]="likedMovies" [getImageUrl]="getImageUrl"
+      [onToggleLike]="onToggleLike"></app-movie-card>
+    }
+  </div>
+
+</div>

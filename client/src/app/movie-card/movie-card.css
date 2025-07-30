@@ -1,0 +1,127 @@
+.movie-card {
+  color: #000000;
+  text-align: center;
+}
+
+.poster-container {
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.poster-container img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+}
+
+/* Rating badge */
+
+/* Like button */
+.like-button {
+  background: transparent;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.like-button:hover {
+  transform: scale(1.2);
+}
+
+.like-button.liked {
+  color: gold;
+}
+
+/* Title & date */
+.movie-card h4 {
+  font-weight: 600;
+}
+
+.movie-card p {
+  font-size: 15px;
+  color: #666;
+  margin: 0;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.pagination-container button {
+  background-color: transparent;
+  border: 1px solid #ddd;
+  color: #333;
+  font-size: 0.95rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination-container button:hover {
+  background-color: #eee;
+}
+
+.pagination-container button.active {
+  background-color: #facc15;
+  /* Tailwind's yellow-400 */
+  color: black;
+  font-weight: bold;
+  border-color: #facc15;
+  box-shadow: 0 0 4px rgba(250, 204, 21, 0.7);
+}
+
+.pagination-container button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rating-circle {
+  --rating: 85;
+  --size: 58px;
+  --border-width: 4px;
+  --rating-badge-col: limegreen;
+
+  position: absolute;
+  transform: translateY(-60%);
+  left: 5px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: conic-gradient(var(--rating-badge-col) calc(var(--rating) * 10%),
+      #222 calc(var(--rating) * 10%));
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 0 0 2px #0f0f0f, 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.rating-circle span {
+  width: calc(var(--size) - var(--border-width) * 2);
+  height: calc(var(--size) - var(--border-width) * 2);
+  background: #0f0f0f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 15px;
+}
+
+.rating-circle sup {
+  font-size: .8rem;
+  margin-top: 4px;
+  margin-left: 1px;
+  color: #ccc;
+}

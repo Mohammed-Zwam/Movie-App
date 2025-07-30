@@ -1,0 +1,20 @@
+<app-search (dataEmitter)="onSearch($event)"></app-search>
+
+@if(isLoading) {
+  <app-loading></app-loading>
+} @else{
+  <app-movie-list [movies]="movies" [likedMovies]="likedMovies" [getImageUrl]="getImageUrl"
+    [onToggleLike]="onToggleLike.bind(this)"></app-movie-list>
+
+  <div class="pagination">
+    <button (click)="prevPages()" [disabled]="pageWindowStart === 1">‹</button>
+
+    @for(page of getPageNumbers(); track page) {
+    <button [class.active]="page === currentPage" (click)="goToPage(page)">
+      {{ page }}
+    </button>
+    }
+
+    <button (click)="nextPages()" [disabled]="pageWindowStart + pageWindowSize > totalPages">›</button>
+  </div>
+}
