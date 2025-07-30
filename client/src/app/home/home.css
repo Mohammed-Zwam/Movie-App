@@ -1,0 +1,44 @@
+
+
+/* Movie list padding */
+app-movie-list {
+  display: block;
+  padding: 20px;
+}
+
+/* ===== Pagination Styling ===== */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 0;
+}
+
+.pagination button {
+  background-color: #1c1c1c;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.pagination button:hover {
+  background-color: #333;
+  border-color: #666;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination button.active {
+  background-color: #ffd700;
+  color: #000;
+  font-weight: bold;
+  border-color: #ffd700;
+}

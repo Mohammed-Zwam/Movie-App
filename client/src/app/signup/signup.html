@@ -1,0 +1,16 @@
+<div class="auth-container">
+  <h2>Signup</h2>
+
+  <form (ngSubmit)="signup()">
+    <input type="username" name="username" class="form-control mb-3" [(ngModel)]="username" placeholder="Username"
+      required>
+    <input type="email" name="email" class="form-control mb-3" [(ngModel)]="email" placeholder="Email" required>
+    <input type="password" name="password" class="form-control mb-3" [(ngModel)]="password" placeholder="Password"
+      required />
+    <input type="password" name="password" class="form-control" [(ngModel)]="confirmPassword"
+      placeholder="Confirm Password" required />
+    <button type="submit" class="mt-5 btn btn-warning w-100">Create Account</button>
+    <p *ngIf="errorMessage" class="err mt-4">{{ errorMessage }}</p>
+    <p *ngIf="successMessage" class="success mt-4">{{ successMessage }}</p>
+  </form>
+</div>

@@ -1,0 +1,46 @@
+@if(isLoading) {
+<div class="page-loading-container">
+  <app-loading></app-loading>
+</div>
+} @else {
+<div class="m-5">
+  @if(watchList.length > 0){
+  <h1 class="fs-2 fw-semibold title mb-5">Movies</h1>
+  }
+  <div [ngClass]="{'movies-grid m-4': watchList.length > 0}">
+    @for(movie of watchList; track movie.id) {
+    <div class="movie-card">
+      <div class="poster-container">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" [alt]="movie.title" />
+        <div class="rating-circle" [style.--rating]="movie.vote_average"
+          [style.--rating-badge-col]="movie.vote_average >= 7 ? 'limegreen' : movie.vote_average <= 5 ? 'red': 'yellow' ">
+          <span>{{( movie.vote_average / 10) * 100 | number:'1.0-1'}}<sup>%</sup></span>
+        </div>
+      </div>
+
+      <div class="m-3 d-flex align-items-center justify-content-between">
+        <div>
+          <h4 class="fs-5 mt-4">{{ movie.title }}</h4>
+          <p>{{ movie.release_date | date: 'MMM dd, yyyy' }}</p>
+        </div>
+        <button class="like-button" (click)="removeFromWatchList(movie._id)">
+          💛
+        </button>
+      </div>
+    </div>
+    } @empty{
+    @if(authService.isLoggedIn) {
+    <div class="alert alert-warning  m-3 mt-5 fs-5 fw-semibold" role="alert">
+      ⚠️ You haven't added anything yet. Start by adding your first item !
+    </div>
+    } @else {
+    <div class="alert alert-warning m-3 mt-5 fs-5 fw-semibold" role="alert">
+      ⚠️ Please sign in or create an account to get started.
+    </div>
+    }
+    }
+  </div>
+
+</div>
+
+}
