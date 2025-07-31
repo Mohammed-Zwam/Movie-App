@@ -1,4 +1,4 @@
-<div class="movie-card">
+<div class="movie-card" (click)="goToDetails()">
   <div class="poster-container">
     <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title" />
     <div class="rating-circle" [style.--rating]="movie.vote_average"

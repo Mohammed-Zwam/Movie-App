@@ -1,3 +1,4 @@
+// movie.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -32,9 +33,15 @@ export class MovieService {
     );
   }
 
-  // Optional: Get a single movie by ID
+  // Get a single movie by ID
   getMovieById(id: string): Observable<Movie> {
     return this.http.get<Movie>(`${this.API}/${id}`);
+  }
+
+  // Get recommendations based on genre IDs
+  getRecommendations(genreIds: number[]): Observable<Movie[]> {
+    const genreQuery = genreIds.join(',');
+    return this.http.get<Movie[]>(`${this.API}/recommendations?genres=${genreQuery}`);
   }
 
   search(title: string): Observable<Movie[]> {
