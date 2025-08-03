@@ -7,7 +7,17 @@
   position: relative;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  /* Added transition for smooth hover effect */
+  transition: all 0.3s ease-in-out;
 }
+
+/* --- HOVER EFFECT ADDED --- */
+/* Lifts and enhances shadow on hover */
+.poster-container:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
 
 .poster-container img {
   width: 100%;
@@ -16,6 +26,56 @@
 }
 
 /* Rating badge */
+.rating-circle {
+  --rating: 85;
+  --size: 58px;
+  --border-width: 4px;
+  --rating-badge-col: limegreen;
+
+  position: absolute;
+  transform: translateY(-60%);
+  left: 5px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: conic-gradient(var(--rating-badge-col) calc(var(--rating) * 10%), #222 calc(var(--rating) * 10%));
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 0 0 2px #0f0f0f, 0 2px 5px rgba(0, 0, 0, 0.4);
+  /* Added transition for smooth hover effect */
+  transition: transform 0.2s ease-in-out;
+}
+
+/* --- HOVER EFFECT ADDED --- */
+/* Scales up the rating circle on hover */
+.rating-circle:hover {
+  transform: translateY(-60%) scale(1.1);
+}
+
+.rating-circle span {
+  width: calc(var(--size) - var(--border-width) * 2);
+  height: calc(var(--size) - var(--border-width) * 2);
+  background: #0f0f0f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 15px;
+}
+
+.rating-circle sup {
+  font-size: .8rem;
+  margin-top: 4px;
+  margin-left: 1px;
+  color: #ccc;
+}
+
 
 /* Like button */
 .like-button {
@@ -81,47 +141,4 @@
 .pagination-container button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.rating-circle {
-  --rating: 85;
-  --size: 58px;
-  --border-width: 4px;
-  --rating-badge-col: limegreen;
-
-  position: absolute;
-  transform: translateY(-60%);
-  left: 5px;
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
-  background: conic-gradient(var(--rating-badge-col) calc(var(--rating) * 10%),
-      #222 calc(var(--rating) * 10%));
-  z-index: 4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: white;
-  box-shadow: 0 0 0 2px #0f0f0f, 0 2px 5px rgba(0, 0, 0, 0.4);
-}
-
-.rating-circle span {
-  width: calc(var(--size) - var(--border-width) * 2);
-  height: calc(var(--size) - var(--border-width) * 2);
-  background: #0f0f0f;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 15px;
-}
-
-.rating-circle sup {
-  font-size: .8rem;
-  margin-top: 4px;
-  margin-left: 1px;
-  color: #ccc;
 }

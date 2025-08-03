@@ -1,0 +1,127 @@
+<div class="movie-details-container">
+    @if(movie) {
+    <div class="backdrop-container">
+        @if(movie.backdrop_path) {
+        <img [src]="getBackdropUrl(movie.backdrop_path)" [alt]="movie.title || 'Movie Backdrop'" class="backdrop-image">
+        }
+        <div class="backdrop-overlay"></div>
+    </div>
+
+    <div class="content-container">
+        <button class="back-button" (click)="goBack()">← Back</button>
+
+        <div class="movie-content">
+            <div class="poster-section">
+                <div class="poster-container">
+                    <img [src]="getImageUrl(movie.poster_path)" [alt]="movie.title || 'Movie Poster'"
+                        class="poster-image">
+                    <div class="rating-circle-container">
+                        <div class="rating-circle" [style.--rating]="movie.vote_average * 10"
+                            [style.--rating-badge-col]="movie.vote_average >= 7 ? 'limegreen' : movie.vote_average <= 5 ? 'red': 'yellow'">
+                            <span>{{ (movie.vote_average | number:'1.1-1') || 'N/A' }}/10</span>
+                        </div>
+                        <div class="rating-label">Rating</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-section">
+                <div class="movie-header">
+                    <h1 class="movie-title">{{ movie.title || 'Untitled Movie' }}</h1>
+                    @if(movie.original_title !== movie.title && movie.original_title) {
+                    <p class="original-title">{{ movie.original_title }}</p>
+                    }
+
+                    <div class="movie-meta">
+                        <span class="release-date">{{ (movie.release_date | date: 'yyyy') || 'N/A' }}</span>
+                        @if(getGenreNames(movie.genre_ids)) {
+                        <span class="genres">{{ getGenreNames(movie.genre_ids) }}</span>
+                        }
+                        @if(movie.adult) {
+                        <span class="adult-badge">18+</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="movie-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Rating</span>
+                        <span class="stat-value">{{ (movie.vote_average | number:'1.1-1') || 'N/A' }}/10</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Votes</span>
+                        <span class="stat-value">{{ (movie.vote_count | number) || 'N/A' }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Popularity</span>
+                        <span class="stat-value">{{ (movie.popularity | number:'1.0-0') || 'N/A' }}</span>
+                    </div>
+                    @if(movie.original_language) {
+                    <div class="stat-item">
+                        <span class="stat-label">Language</span>
+                        <span class="stat-value">{{ movie.original_language | uppercase }}</span>
+                    </div>
+                    }
+                </div>
+
+                @if(movie.overview) {
+                <div class="overview-section">
+                    <h3>Overview</h3>
+                    <p class="overview-text">
+                        @if(showFullOverview) {
+                        {{ movie.overview }}
+                        } @else {
+                        {{ getTruncatedOverview(movie.overview) || 'No overview available.' }}
+                        }
+                    </p>
+                    @if(movie.overview.split(' ').length > overviewWordLimit) {
+                    <button class="show-more-button" (click)="toggleOverview()">
+                        {{ showFullOverview ? 'Show Less' : 'Show More' }}
+                    </button>
+                    }
+                </div>
+                } @else {
+                <div class="overview-section">
+                    <h3>Overview</h3>
+                    <p class="overview-text">No overview available.</p>
+                </div>
+                }
+
+                <div class="action-buttons">
+                    <button class="like-button" (click)="toggleLike()" [class.liked]="isLiked">
+                        {{ isLiked ? '💛 Remove from Watchlist' : '🤍 Add to Watchlist' }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if(recommendations.length > 0) {
+    <div class="recommendations-section">
+        <h2 class="recommendations-title">Recommended Movies</h2>
+        <div class="recommendations-grid">
+            @for(recMovie of recommendations; track recMovie._id) {
+            <div class="recommendation-card" (click)="onRecommendationClick(recMovie)">
+                <div class="rec-poster-container">
+                    <img [src]="getImageUrl(recMovie.poster_path)" [alt]="recMovie.title || 'Recommended Movie'"
+                        class="rec-poster">
+                    <div class="rec-rating-badge" [style.--rating]="recMovie.vote_average"
+                        [style.--rating-color]="recMovie.vote_average >= 7 ? '#4ade80' : recMovie.vote_average <= 5 ? '#ef4444' : '#eab308'">
+                        {{ (recMovie.vote_average * 10) | number:'1.0-0' }}
+                    </div>
+                </div>
+                <div class="rec-info">
+                    <h4 class="rec-title">{{ recMovie.title || 'Untitled' }}</h4>
+                    <p class="rec-date">{{ (recMovie.release_date | date: 'MMM dd, yyyy') || 'N/A' }}</p>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    }
+    } @else {
+    <div class="content-container">
+        <p>No movie data available.</p>
+    </div>
+    }
+</div>
