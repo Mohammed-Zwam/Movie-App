@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const app = express();
 const mongoose = require('mongoose');
+const path = require('path');
 const PORT = process.env.PORT | 3000;
 const mongoURL = process.env.DB_CONNECTION_STRING;
 const authRoutes = require('./routes/AuthRoutes');
@@ -18,6 +19,10 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/movies', movieRoutes);
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
 
 
 
